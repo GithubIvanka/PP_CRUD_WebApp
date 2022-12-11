@@ -5,10 +5,12 @@ import app.repository.UserDAO;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository
 public class UserRepository implements UserDAO {
+    @PersistenceContext
     private final EntityManager entityManager;
 
     public UserRepository(EntityManager entityManager) {

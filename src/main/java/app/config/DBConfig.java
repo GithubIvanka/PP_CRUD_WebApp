@@ -47,7 +47,7 @@ public class DBConfig {
 
         properties.put("hibernate.show_sql", en.getProperty("hibernate.show_sql"));
         properties.put("hibernate.hbm2ddl.auto", en.getProperty("hibernate.hbm2ddl.auto"));
-        properties.put("hibernate.dialect", en.getProperty("hibernate.dialect"));
+//        properties.put("hibernate.dialect", en.getProperty("hibernate.dialect"));
 
         return properties;
     }
@@ -57,8 +57,8 @@ public class DBConfig {
         LocalContainerEntityManagerFactoryBean entityManager = new LocalContainerEntityManagerFactoryBean();
 
         entityManager.setDataSource(dataSource());
-        entityManager.setJpaProperties(properties());
         entityManager.setPackagesToScan(en.getProperty("hibernate.package"));
+        entityManager.setJpaProperties(properties());
         entityManager.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
 
         return entityManager;
@@ -73,8 +73,8 @@ public class DBConfig {
     public JpaTransactionManager transactionManager() {
         JpaTransactionManager manager = new JpaTransactionManager();
 
-        manager.setDataSource(dataSource());
         manager.setEntityManagerFactory(entityManagerBean().getObject());
+        manager.setDataSource(dataSource());
 
         return manager;
     }
